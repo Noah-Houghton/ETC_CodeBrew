@@ -22,7 +22,7 @@ def main():
     write(exchange, {"type": "hello", "team": "CODEBREW"})
     while True:
         hello_from_exchange = read(exchange)
-        if isBond(hello_from_exchange):
+        if True:
             print(hello_from_exchange['symbol'], file=sys.stderr)
 
 
