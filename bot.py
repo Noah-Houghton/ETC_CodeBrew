@@ -26,7 +26,7 @@ def main():
     n_bonds = 0
     order_id = 0
     write(exchange, {"type": "add", "order_id": order_id, "symbol": "BOND", "dir": "BUY", 
-                     "price": 999, 
+                     "price": 1000, 
                      "size": 10})
     while True:
         try:
