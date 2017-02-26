@@ -20,8 +20,16 @@ def read(exchange):
 def main():
     exchange = connect()
     write(exchange, {"type": "hello", "team": "CODEBREW"})
-    hello_from_exchange = read(exchange)
-    print(hello_from_exchange, file=sys.stderr)
+    while True:
+        hello_from_exchange = read(exchange)
+        if isBond(hello_from_exchange):
+            print(hello_from_exchange, file=sys.stderr)
+
+
+def isBond(message):
+    return (message['symbol'] = "BOND")
+
+
 
 if __name__ == "__main__":
     main()
