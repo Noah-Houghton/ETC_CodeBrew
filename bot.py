@@ -21,9 +21,9 @@ def main():
     exchange = connect()
     write(exchange, {"type": "hello", "team": "CODEBREW"})
     while True:
-        hello_from_exchange = read(exchange)
-        if True:
-            print(hello_from_exchange["symbol"], file=sys.stderr)
+        message = read(exchange)
+        if 'symbol' in message and message['symbol'] == "BOND":
+            print(message["symbol"], file=sys.stderr)
 
 
 
