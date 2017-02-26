@@ -33,6 +33,7 @@ def main():
             message = read(exchange)
         except ValueError:
             print("Exception")
+            break
         if 'symbol' in message and message['symbol'] == "BOND" and 'sell' in message:
             if to_buy(message['sell'])[0] > 0:
                 print(message, file=sys.stderr)
