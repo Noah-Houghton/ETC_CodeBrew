@@ -27,7 +27,7 @@ def main():
 
 
 def isBond(message):
-    return (message['symbol'] = "BOND")
+    return (message['symbol'] == "BOND")
 
 
 
