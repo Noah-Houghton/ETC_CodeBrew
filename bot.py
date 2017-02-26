@@ -31,8 +31,8 @@ def main():
 
 
 def to_buy(message):
-    for i in message:
-        if message[i][0] <= 1000:
+    for t in message:
+        if t[0] <= 1000:
             return True
             #Buy message['sell'][i][1] of them
 
