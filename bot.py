@@ -34,7 +34,11 @@ def main():
         except ValueError:
             print("Exception")
             break
-        if 'symbol' in message and message['symbol'] == "BOND" and 'sell' in message:
+
+        if 'type' in message and message['type'] == "fill": #filling order
+          n_bonds += message["size"]
+          print(message, file=sys.stderr)
+        elif 'symbol' in message and message['symbol'] == "BOND" and 'sell' in message:
             if to_buy(message['sell'])[0] > 0:
                 print(message, file=sys.stderr)
                 #write(exchange, {"type": "add", "order_id": order_id, "symbol": "BOND", "dir": "BUY", 
@@ -45,10 +49,6 @@ def main():
         elif 'type' in message:
             if message['type'] == "ack" or message['type'] == "reject":
                 print(message, file=sys.stderr)
-
-        elif 'type' in message and message['type'] == "fill": #filling order
-          n_bonds += message["size"]
-          print(message, file=sys.stderr)
 
 
 
