@@ -25,7 +25,9 @@ def main():
 
     n_bonds = 0
     order_id = 0
-
+    write(exchange, {"type": "add", "order_id": order_id, "symbol": "BOND", "dir": "BUY", 
+                     "price": 999, 
+                     "size": 10})
     while True:
         try:
             message = read(exchange)
@@ -34,10 +36,10 @@ def main():
         if 'symbol' in message and message['symbol'] == "BOND" and 'sell' in message:
             if to_buy(message['sell'])[0] > 0:
                 print(message, file=sys.stderr)
-                write(exchange, {"type": "add", "order_id": order_id, "symbol": "BOND", "dir": "BUY", 
-                                 "price": to_buy(message['sell'])[0], 
-                                 "size": to_buy(message['sell'])[1]})
-                order_id += 1
+                #write(exchange, {"type": "add", "order_id": order_id, "symbol": "BOND", "dir": "BUY", 
+                #                 "price": to_buy(message['sell'])[0], 
+                #                 "size": to_buy(message['sell'])[1]})
+                #order_id += 1
                 print(n_bonds)
         elif 'type' in message:
             if message['type'] == "ack" or message['type'] == "reject":
@@ -47,8 +49,6 @@ def main():
           n_bonds += message["size"]
           print(message, file=sys.stderr)
 
-        else:
-            print(n_bonds)
 
 
 def to_buy(message):
