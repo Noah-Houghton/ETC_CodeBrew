@@ -23,7 +23,7 @@ def main():
     while True:
         message = read(exchange)
         if 'symbol' in message and message['symbol'] == "BOND":
-            print(message["symbol"], file=sys.stderr)
+            print(message, file=sys.stderr)
 
 
 
