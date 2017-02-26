@@ -23,11 +23,8 @@ def main():
     while True:
         hello_from_exchange = read(exchange)
         if isBond(hello_from_exchange):
-            print(hello_from_exchange, file=sys.stderr)
+            print(hello_from_exchange['symbol'], file=sys.stderr)
 
-
-def isBond(message):
-    return (message['symbol'] == "BOND")
 
 
 
