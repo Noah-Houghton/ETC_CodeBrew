@@ -42,7 +42,7 @@ def main():
             if message['type'] == "ack" or message['type'] == "reject":
                 print(message, file=sys.stderr)
 
-        elif 'type' in message and message['type'] = "fill": #filling order
+        elif 'type' in message and message['type'] == "fill": #filling order
           n_bonds += message["size"]
 
         else:
