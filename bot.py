@@ -20,6 +20,8 @@ def read(exchange):
 def main():
     exchange = connect()
     write(exchange, {"type": "hello", "team": "CODEBREW"})
+    message = read(exchange)
+    print(message, file=sys.stderr)
     while True:
         try:
             message = read(exchange)
