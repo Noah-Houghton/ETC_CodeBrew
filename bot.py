@@ -28,7 +28,13 @@ def main():
         except ValueError:
             print("Exception") 
         if 'symbol' in message and message['symbol'] == "BOND" and 'sell' in message:
-            if to_buy(message['sell']):
+            if to_buy(message['sell'])[0] > 0:
+                print(message, file=sys.stderr)
+                write(exchange, {"type": "add", "order_id": 5, "symbol": "BOND", "dir": "BUY", 
+                                 "price": to_buy(message['sell'])[0], 
+                                 "size": to_buy(message['sell'])[1]})
+        elif 'type' in message:
+            if message['type'] == "ack" or message['type'] == "reject":
                 print(message, file=sys.stderr)
 
 
@@ -36,7 +42,8 @@ def to_buy(message):
     for t in message:
         print(t)
         if t[0] <= 1000:
-            return True
+            return t
+    return [0,0]
             #Buy message['sell'][i][1] of them
 
 
