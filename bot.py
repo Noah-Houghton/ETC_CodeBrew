@@ -38,12 +38,14 @@ def main():
                                  "price": to_buy(message['sell'])[0], 
                                  "size": to_buy(message['sell'])[1]})
                 order_id += 1
+                print(n_bonds)
         elif 'type' in message:
             if message['type'] == "ack" or message['type'] == "reject":
                 print(message, file=sys.stderr)
 
         elif 'type' in message and message['type'] == "fill": #filling order
           n_bonds += message["size"]
+          print(message, file=sys.stderr)
 
         else:
             print(n_bonds)
