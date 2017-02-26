@@ -21,11 +21,20 @@ def main():
     exchange = connect()
     write(exchange, {"type": "hello", "team": "CODEBREW"})
     while True:
-        message = read(exchange)
+        try:
+            message = read(exchange)
+        except ValueError:
+            print("Exception") 
         if 'symbol' in message and message['symbol'] == "BOND":
-            print(message, file=sys.stderr)
+            if to_buy(message['sell']):
+                print(message, file=sys.stderr)
 
 
+def to_buy(message):
+    for i in message:
+        if message[i][0] <= 1000:
+            return True
+            #Buy message['sell'][i][1] of them
 
 
 if __name__ == "__main__":
