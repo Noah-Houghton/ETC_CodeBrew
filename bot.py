@@ -22,12 +22,9 @@ def main():
     write(exchange, {"type": "hello", "team": "CODEBREW"})
     while True:
         hello_from_exchange = read(exchange)
-        if isBond(hello_from_exchange):
-            print(hello_from_exchange, file=sys.stderr)
+        if True:
+            print(hello_from_exchange["symbol"], file=sys.stderr)
 
-
-def isBond(message):
-    return (message['symbol'] = "BOND")
 
 
 
