@@ -11,6 +11,8 @@ buys = [{"type": "add", "order_id": 0, "symbol": "BOND", "dir": "BUY", "price": 
         {"type": "add", "order_id": 0, "symbol": "BOND", "dir": "BUY", "price": 998, "size": 2},
         {"type": "add", "order_id": 0, "symbol": "BOND", "dir": "BUY", "price": 997, "size": 1}]
 
+sells = [{"type": "add", "order_id": 0, "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}]
+
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,9 +46,20 @@ def main():
             break
 
         if 'type' in message and message['type'] == "fill": #filling order
-          n_bonds += message["size"]
-          print("Bought ", message["size"], " BONDs @ ", message["price"])
-          write(exchange, buy(0, order_id, message["size"]))
+            if message['dir'] == "BUY":
+                n_bonds += message["size"]
+                print("Bought ", message["size"], " BONDs @ ", message["price"])
+                if n_bonds < 10:
+                    write(exchange, buy(0, order_id, message["size"]))
+                    order_id += 1
+                else:
+                    write(exchange, sell(0, order_id, 10))
+                    order_id += 1
+            else: #sold!
+                n_bonds -= message["size"]
+                print("Sold ", message["size"], " BONDs @ ", message["price"])
+
+
           #print(message, file=sys.stderr)
         #elif 'symbol' in message and message['symbol'] == "BOND" and 'sell' in message:
         #    if to_buy(message['sell'])[0] > 0:
@@ -71,6 +84,11 @@ def to_buy(message):
 
 def buy(index, order_id, n):
   tmp = buys[index]
+  tmp["order_id"] = order_id; tmp["size"] = n
+  return tmp
+
+def sell(index, order_id, n):
+  tmp = sells[index]
   tmp["order_id"] = order_id; tmp["size"] = n
   return tmp
 
