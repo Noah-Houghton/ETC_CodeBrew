@@ -23,7 +23,7 @@ def main():
     while True:
         hello_from_exchange = read(exchange)
         if True:
-            print(hello_from_exchange['u\'symbol'], file=sys.stderr)
+            print(hello_from_exchange, file=sys.stderr)
 
 
 
