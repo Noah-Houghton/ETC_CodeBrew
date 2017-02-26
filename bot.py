@@ -20,9 +20,8 @@ def read(exchange):
 def main():
     exchange = connect()
     write(exchange, {"type": "hello", "team": "CODEBREW"})
-    while (True):
-        hello_from_exchange = read(exchange)
-        print("The exchange replied:", hello_from_exchange, file=sys.stderr)
+    hello_from_exchange = read(exchange)
+    print(hello_from_exchange, file=sys.stderr)
 
 if __name__ == "__main__":
     main()
